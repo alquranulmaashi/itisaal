@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Past-Tense Verb &amp; Pronouns — Interactive Lesson</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --green:#137a54; --green-d:#0d5a3d; --green-l:#e4f4ec;
+    --blue:#1668a8;  --blue-d:#0f4e80; --blue-l:#e3f0fa;
+    --amber:#b7770a; --amber-l:#fbf0da;
+    --rose:#c0396b;  --rose-d:#93264f; --rose-l:#fbe6ee;
+    --teal:#0e7c86;  --teal-d:#0a5f67; --teal-l:#ddf1f2;
+    --olive:#667a2a; --olive-d:#4d5e1c; --olive-l:#eef2dc;
+    --gold:#c9a227;
+    --ink:#233436; --muted:#5d7175;
+    --bg:#f6f4ec; --card:#ffffff; --line:#e5e2d6;
+    --shadow:0 6px 22px rgba(30,50,45,.10);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:'Nunito',system-ui,sans-serif;
+    background:
+      radial-gradient(1200px 500px at 100% -10%, #f0f3e2 0, transparent 60%),
+      radial-gradient(900px 500px at -10% 110%, #f7efe1 0, transparent 55%),
+      var(--bg);
+    color:var(--ink); line-height:1.55; min-height:100vh; padding:22px 16px 60px;
+  }
+  .ar{font-family:'Amiri',serif; direction:rtl; unicode-bidi:isolate;}
+  .wrap{max-width:960px; margin:0 auto;}
+
+  header.top{display:flex; align-items:center; gap:14px; margin-bottom:18px;}
+  .badge{flex:0 0 auto; width:46px; height:46px; border-radius:13px;
+    background:linear-gradient(145deg,var(--olive),var(--olive-d));
+    color:#fff; display:grid; place-items:center; font-weight:800; font-size:20px; box-shadow:var(--shadow);}
+  header.top h1{font-size:19px; font-weight:800; line-height:1.2}
+  header.top p{font-size:14px; color:var(--muted)}
+  .progress{height:8px; background:#e7e3d5; border-radius:99px; overflow:hidden; margin:6px 0 20px}
+  .progress > i{display:block; height:100%; width:0;
+    background:linear-gradient(90deg,var(--gold),var(--olive)); border-radius:99px; transition:width .4s ease}
+
+  .dots{display:flex; flex-wrap:wrap; gap:7px; justify-content:center; margin-bottom:18px}
+  .dots button{border:none; cursor:pointer; font:inherit; font-size:12px; font-weight:700;
+    padding:5px 11px; border-radius:99px; background:#eae6d8; color:var(--muted); transition:.2s;}
+  .dots button.active{background:var(--olive); color:#fff; box-shadow:var(--shadow)}
+  .dots button:hover{background:#ded9c8}
+  .dots button.active:hover{background:var(--olive)}
+
+  .slide{display:none; animation:pop .35s ease}
+  .slide.show{display:block}
+  @keyframes pop{from{opacity:0; transform:translateY(10px)}to{opacity:1; transform:none}}
+  .panel{background:var(--card); border:1px solid var(--line); border-radius:20px; box-shadow:var(--shadow); padding:26px 24px}
+  .eyebrow{display:inline-block; font-size:12px; font-weight:800; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--olive-d); background:var(--olive-l); padding:5px 12px; border-radius:99px; margin-bottom:12px}
+  h2.title{font-size:21px; font-weight:800; margin-bottom:4px}
+  h2.title .ar{font-size:27px; display:block; margin-bottom:2px}
+  .lead{color:var(--muted); font-size:14.5px; margin-bottom:16px}
+
+  .hero{text-align:center; padding:34px 20px}
+  .hero .big{font-size:40px; color:var(--olive-d); font-weight:700; margin-bottom:8px}
+  .hero .sub{font-size:19px; color:var(--amber); font-weight:800; margin-bottom:16px}
+  .mini{padding:10px 15px; border-radius:13px; font-weight:800; font-size:13px; display:inline-block}
+  .chips{display:flex; gap:9px; justify-content:center; flex-wrap:wrap; margin-top:10px}
+
+  .grid{display:grid; gap:11px}
+  .g4{grid-template-columns:repeat(4,1fr)}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g2{grid-template-columns:repeat(2,1fr)}
+  @media(max-width:720px){.g4,.g3{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:460px){.g4,.g3,.g2{grid-template-columns:1fr}}
+
+  /* sound verb cards */
+  .vcard{background:#fff; border:1.5px solid var(--olive-l); border-radius:14px; padding:12px 8px; text-align:center}
+  .vcard .w{font-family:'Amiri',serif; font-size:24px; font-weight:700; color:var(--olive-d)}
+  .vcard .gloss{font-size:11.5px; color:var(--muted); margin-top:2px}
+  .vcard .wt{font-family:'Amiri',serif; font-size:13px; color:var(--muted)}
+  .criteria{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:14px}
+  @media(max-width:560px){.criteria{grid-template-columns:1fr}}
+  .crit{background:var(--olive-l); border-radius:12px; padding:11px 12px; font-size:12.5px; text-align:center}
+  .crit b{display:block; font-size:13px; color:var(--olive-d); margin-bottom:2px}
+
+  /* breakdown */
+  .breakdown{text-align:center; background:var(--bg); border:1.5px dashed var(--line); border-radius:18px;
+    padding:24px 16px; margin:6px 0 16px}
+  .breakdown .phrase{font-family:'Amiri',serif; font-size:44px; font-weight:700; margin-bottom:14px}
+  .bd-parts{display:flex; justify-content:center; gap:20px; flex-wrap:wrap}
+  .bd-part{min-width:150px}
+  .bd-part .w{font-family:'Amiri',serif; font-size:30px; font-weight:700}
+  .bd-part .tag{display:inline-block; font-size:11px; font-weight:800; text-transform:uppercase;
+    letter-spacing:.04em; padding:4px 10px; border-radius:99px; margin-top:6px}
+  .bd-part .desc{font-size:12px; color:var(--muted); margin-top:4px}
+  .bd-stem .w{color:var(--ink)} .bd-stem .tag{background:var(--olive-l); color:var(--olive-d)}
+  .bd-end .w{color:var(--rose-d)} .bd-end .tag{background:var(--rose-l); color:var(--rose-d)}
+
+  /* conjugation tables */
+  table.ctab{width:100%; border-collapse:separate; border-spacing:0 7px}
+  table.ctab th{font-size:11.5px; color:var(--muted); font-weight:800; text-transform:uppercase; letter-spacing:.03em; padding:0 6px 2px}
+  table.ctab td{background:#fff; border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:9px 6px; text-align:center; vertical-align:middle}
+  table.ctab td:first-child{border-left:1px solid var(--line); border-radius:12px 0 0 12px; text-align:left; padding-left:12px; width:112px}
+  table.ctab td:last-child{border-right:1px solid var(--line); border-radius:0 12px 12px 0}
+  table.ctab .rl{font-weight:800; font-size:12.5px}
+  table.ctab .rl small{display:block; color:var(--muted); font-weight:600; font-size:10.5px}
+  table.ctab .cw{font-family:'Amiri',serif; font-size:23px; font-weight:700; line-height:1.4}
+  table.ctab .cw .tail{color:var(--rose-d)}
+  table.ctab .pn{font-family:'Amiri',serif; font-size:13px; color:var(--muted); direction:rtl}
+  table.ctab .endonly{font-family:'Amiri',serif; font-size:25px; font-weight:700; color:var(--rose-d)}
+  .r1 td:first-child{background:var(--teal-l)} .r1 .rl{color:var(--teal-d)}
+  .rm td:first-child{background:var(--blue-l)} .rm .rl{color:var(--blue-d)}
+  .rf td:first-child{background:var(--rose-l)} .rf .rl{color:var(--rose-d)}
+  .dash{color:var(--muted); font-size:18px}
+
+  /* verb chooser */
+  .vchips{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px}
+  .vchip{border:1.5px solid var(--line); background:#fff; border-radius:12px; padding:7px 12px; cursor:pointer;
+    font:inherit; text-align:center; transition:.15s}
+  .vchip .w{font-family:'Amiri',serif; font-size:19px; font-weight:700; color:var(--ink); display:block; line-height:1.3}
+  .vchip small{font-size:10px; color:var(--muted)}
+  .vchip:hover{border-color:var(--olive)}
+  .vchip.active{background:var(--olive); border-color:var(--olive)}
+  .vchip.active .w,.vchip.active small{color:#fff}
+  .curverb{text-align:center; margin-bottom:10px}
+  .curverb .w{font-family:'Amiri',serif; font-size:34px; font-weight:700; color:var(--olive-d)}
+  .curverb .m{font-size:12.5px; color:var(--muted)}
+
+  /* combine cards */
+  .icard{border:1.5px solid var(--line); border-radius:16px; background:#fff; padding:14px; text-align:center; cursor:pointer; transition:.2s}
+  .icard:hover{border-color:var(--olive)}
+  .icard .src{font-family:'Amiri',serif; font-size:19px; color:var(--muted); font-weight:700}
+  .icard .down{color:var(--olive); font-weight:800; margin:4px 0; opacity:.35; transition:.25s}
+  .icard.open .down{opacity:1}
+  .icard .res{font-family:'Amiri',serif; font-size:24px; font-weight:700; color:var(--olive-d);
+    max-height:0; opacity:0; overflow:hidden; transition:.35s}
+  .icard.open .res{max-height:60px; opacity:1}
+  .icard .gloss{font-size:11.5px; color:var(--muted); font-style:italic; max-height:0; opacity:0; overflow:hidden; transition:.35s}
+  .icard.open .gloss{max-height:40px; opacity:1; margin-top:3px}
+  .icard .tap{font-size:10.5px; color:var(--muted); font-weight:700; margin-top:6px}
+  .icard.open .tap{display:none}
+
+  /* sentence rows */
+  .exrow{display:flex; align-items:center; justify-content:space-between; gap:12px; background:#fff;
+    border:1px solid var(--line); border-radius:13px; padding:10px 14px; margin-bottom:8px}
+  .exrow .phrase{font-family:'Amiri',serif; font-size:22px; font-weight:700}
+  .exrow .phrase .vb{color:var(--rose-d)}
+  .exrow .phrase .sb{color:var(--blue-d)}
+  .exrow .gl{font-size:12px; color:var(--muted); font-style:italic; text-align:right}
+  @media(max-width:600px){.exrow{flex-direction:column; align-items:center; text-align:center} .exrow .gl{text-align:center}}
+  .subhead{font-weight:800; font-size:13px; color:var(--olive-d); margin:12px 0 8px}
+  .legend{display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-top:4px; font-size:12px; color:var(--muted)}
+  .legend span{display:inline-flex; align-items:center; gap:6px}
+  .legend i{width:12px; height:12px; border-radius:4px; display:inline-block}
+
+  /* qur'an */
+  .qbox{background:var(--green-l); border:1px solid #cfe6da; border-radius:14px; padding:12px 14px; margin-top:12px}
+  .qbox .tag{font-size:10.5px; font-weight:800; color:var(--green-d); text-transform:uppercase; letter-spacing:.04em; margin-bottom:4px}
+  .qbox .qitem{padding:7px 0; border-bottom:1px dashed #cfe6da}
+  .qbox .qitem:last-child{border-bottom:none; padding-bottom:0}
+  .qbox .line{font-family:'Amiri',serif; font-size:20px; font-weight:700; color:var(--green-d); line-height:1.8}
+  .qbox .hl{padding:0 4px; border-radius:5px; background:#fff; border:1px solid #b9dbc7}
+  .qbox small{display:block; color:var(--muted); font-style:italic; font-size:11.5px; margin-top:2px}
+
+  .note{margin-top:10px; background:#fffbf0; border:1px solid #efe6c4; border-radius:14px; padding:12px 14px; font-size:13px; display:flex; gap:10px}
+  .note .ic{flex:0 0 auto; width:26px; height:26px; border-radius:8px; background:var(--gold); color:#fff; display:grid; place-items:center; font-weight:800}
+
+  table.recap{width:100%; border-collapse:separate; border-spacing:0 7px; font-size:13px}
+  table.recap td{background:#fff; border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:9px 12px; vertical-align:top}
+  table.recap td:first-child{border-left:1px solid var(--line); border-radius:10px 0 0 10px; width:24%; font-weight:800}
+  table.recap td:last-child{border-right:1px solid var(--line); border-radius:0 10px 10px 0}
+  table.recap .w{font-family:'Amiri',serif; font-size:17px; font-weight:700; color:var(--olive-d)}
+
+  /* quiz */
+  .quiz .q-word{text-align:center; font-family:'Amiri',serif; font-size:42px; font-weight:700; margin:6px 0 2px}
+  .quiz .q-for{text-align:center; font-size:14px; color:var(--muted); margin-bottom:12px}
+  .quiz .q-for b{color:var(--olive-d)}
+  .q-count{text-align:center; color:var(--muted); font-size:13px; font-weight:700; margin-bottom:10px}
+  .opts{display:grid; grid-template-columns:repeat(2,1fr); gap:10px}
+  @media(max-width:560px){.opts{grid-template-columns:1fr}}
+  .opt{border:2px solid var(--line); background:#fff; border-radius:14px; padding:12px 10px; cursor:pointer;
+    font-family:'Amiri',serif; font-weight:700; font-size:24px; transition:.15s; text-align:center}
+  .opt:hover{border-color:var(--olive); background:#f8faee}
+  .opt:disabled{cursor:default}
+  .opt.correct{background:var(--green); color:#fff; border-color:var(--green)}
+  .opt.wrong{background:var(--rose-l); border-color:var(--rose); color:var(--rose)}
+  .fb{margin-top:14px; border-radius:14px; padding:13px 15px; font-size:14px; font-weight:600; display:none}
+  .fb.show{display:block; animation:pop .3s}
+  .fb.ok{background:var(--green-l); color:var(--green-d)}
+  .fb.no{background:var(--rose-l); color:var(--rose)}
+  .scoreline{text-align:center; margin-top:16px; font-weight:800; color:var(--green-d)}
+
+  .keyrow{display:flex; gap:14px; align-items:flex-start; background:#fff; border:1px solid var(--line);
+    border-radius:14px; padding:12px 16px; margin-bottom:9px}
+  .keyrow .qn{flex:0 0 auto; width:30px; height:30px; border-radius:50%; background:var(--olive-l);
+    color:var(--olive-d); font-weight:800; display:grid; place-items:center; font-size:13px}
+  .keyrow .body{flex:1}
+  .keyrow .phrase{font-family:'Amiri',serif; font-size:21px; font-weight:700; color:var(--ink)}
+  .keyrow .verdict{display:inline-block; font-family:'Amiri',serif; font-size:17px; font-weight:700;
+    padding:1px 12px; border-radius:99px; margin-left:10px; vertical-align:middle; background:var(--olive-l); color:var(--olive-d)}
+  .keyrow .why{font-size:12.5px; color:var(--muted); margin-top:4px}
+
+  .nav{display:flex; justify-content:space-between; align-items:center; gap:12px; margin-top:20px}
+  .btn{border:none; cursor:pointer; font:inherit; font-weight:800; font-size:15px; padding:12px 22px; border-radius:13px; transition:.2s}
+  .btn.prev{background:#eae6d8; color:var(--ink)} .btn.prev:hover{background:#ded9c8}
+  .btn.next{background:linear-gradient(145deg,var(--olive),var(--olive-d)); color:#fff; box-shadow:var(--shadow)}
+  .btn.next:hover{filter:brightness(1.12)}
+  .btn:disabled{opacity:.4; cursor:default}
+  .kbd-hint{text-align:center; color:var(--muted); font-size:12px; margin-top:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="badge">ماضٍ</div>
+    <div>
+      <h1>The Past-Tense Verb &amp; Pronouns</h1>
+      <p class="ar" style="font-size:15px">اتِّصَالُ الفِعْلِ المَاضِي مَعَ الضَّمَائِر</p>
+    </div>
+  </header>
+  <div class="progress"><i id="bar"></i></div>
+  <div class="dots" id="dots"></div>
+
+  <!-- 0 INTRO -->
+  <section class="slide show">
+    <div class="panel hero">
+      <div class="ar big">اتِّصَالُ الفِعْلِ المَاضِي</div>
+      <div class="sub">One Verb, Fourteen Endings</div>
+      <p class="lead" style="max-width:600px;margin:0 auto 16px">
+        In Arabic the past-tense verb carries its subject inside it. Keep the stem, change the
+        <b>ending</b>, and the verb tells you <b>who</b> did it. You'll practise on a dozen sound
+        three-letter verbs, then see the same endings in the Qur'an.
+      </p>
+      <div class="chips">
+        <span class="mini" style="background:var(--olive-l);color:var(--olive-d)">الجذع — stem</span>
+        <span class="mini" style="background:var(--rose-l);color:var(--rose-d)">النهاية — ending</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 1 SOUND VERBS -->
+  <section class="slide">
+    <div class="panel">
+      <span class="eyebrow">Which verbs?</span>
+      <h2 class="title"><span class="ar">الفِعْلُ الصَّحِيحُ السَّالِم</span>Sound three-letter verbs</h2>
+      <p class="lead">These verbs are the easiest to conjugate because the stem never bends. A verb is “sound” when its three root letters are all plain consonants:</p>
+      <div class="criteria">
+        <div class="crit"><b>No weak letter</b>no و، ا، ي in the root</div>
+        <div class="crit"><b>No hamza</b>no ء in the root</div>
+        <div class="crit"><b>No doubling</b>no repeated letter like مدّ</div>
+      </div>
+      <div class="grid g4">
+        <div class="vcard"><div class="w">كَتَبَ</div><div class="gloss">he wrote</div></div>
+        <div class="vcard"><div class="w">ذَهَبَ</div><div class="gloss">he went</div></div>
+        <div class="vcard"><div class="w">جَلَسَ</div><div class="gloss">he sat</div></div>
+        <div class="vcard"><div class="w">دَخَلَ</div><div class="gloss">he entered</div></div>
+        <div class="vcard"><div class="w">خَرَجَ</div><div class="gloss">he went out</div></div>
+        <div class="vcard"><div class="w">فَتَحَ</div><div class="gloss">he opened</div></div>
+        <div class="vcard"><div class="w">نَصَرَ</div><div class="gloss">he helped</div></div>
+        <div class="vcard"><div class="w">حَمَلَ</div><div class="gloss">he carried</div></div>
+        <div class="vcard"><div class="w">سَمِعَ</div><div class="gloss">he heard</div><div class="wt">فَعِلَ</div></div>
+        <div class="vcard"><div class="w">شَرِبَ</div><div class="gloss">he drank</div><div class="wt">فَعِلَ</div></div>
+        <div class="vcard"><div class="w">فَهِمَ</div><div class="gloss">he understood</div><div class="wt">فَعِلَ</div></div>
+        <div class="vcard"><div class="w">عَلِمَ</div><div class="gloss">he knew</div><div class="wt">فَعِلَ</div></div>
+      </div>
+      <div class="note"><span class="ic">i</span><div>The first eight follow <span class="ar" style="font-size:17px">فَعَلَ</span>; the last four follow <span class="ar" style="font-size:17px">فَعِلَ</span> (kasra on the middle letter) — both patterns from your Form I lesson. Hollow, defective and doubled verbs, such as <span class="ar" style="font-size:17px">قَالَ → قُلْتُ</span>, <span class="ar" style="font-size:17px">رَمَى → رَمَوْا</span> and <span class="ar" style="font-size:17px">مَدَّ → مَدَدْتُ</span>, bend the stem and need their own lesson.</div></div>
+    </div>
+  </section>
+
+  <!-- 2 BIG IDEA -->
+  <section class="slide">
+    <div class="panel">
+      <span class="eyebrow">The big idea</span>
+      <h2 class="title"><span class="ar">جِذْعٌ + نِهَايَة</span>Stem + ending = who did it</h2>
+      <p class="lead">Take <b>كَتَبَ</b> (he wrote). Split off the ending and you can swap it for any pronoun.</p>
+      <div class="breakdown">
+        <div class="phrase">كَتَبْتُ</div>
+        <div class="bd-parts">
+          <div class="bd-part bd-stem"><div class="w">كَتَبْ</div><div class="tag">Stem</div><div class="desc">the 3 root letters —<br>the last one now has sukūn</div></div>
+          <div class="bd-part bd-end"><div class="w">ـتُ</div><div class="tag">Ending</div><div class="desc">“I” — أَنَا</div></div>
+        </div>
+      </div>
+      <div class="note"><span class="ic">i</span><div><b>كَتَبْتُ</b> = “I wrote.” No separate word for “I” is needed — the ending already says it. With the endings that start with ت or ن, the last root letter takes a <b>sukūn</b> first.</div></div>
+    </div>
+  </section>
+
+  <!-- 3 ENDINGS -->
+  <section class="slide">
+    <div class="panel">
+      <span class="eyebrow">The endings</span>
+      <h2 class="title" style="font-size:20px">Fourteen pronouns, fourteen endings</h2>
+      <p class="lead">These attach to every sound verb. Read across: singular, dual, plural.</p>
+      <div id="endTable"></div>
+      <div class="note"><span class="ic">i</span><div>The <b>dual “you”</b> ending <span class="ar" style="font-size:17px">ـْتُمَا</span> is the same for men and women, just like the dual pronoun you met earlier.</div></div>
+    </div>
+  </section>
+
+  <!-- 4 CONJUGATOR -->
+  <section class="slide">
+    <div class="panel">
+      <span class="eyebrow" style="color:var(--olive-d);background:var(--olive-l)">Try it</span>
+      <h2 class="title" style="font-size:20px">Conjugate any verb — tap to switch</h2>
+      <div class="vchips" id="vchips"></div>
+      <div class="curverb"><div class="w" id="curW"></div><div class="m" id="curM"></div></div>
+      <div id="conjTable"></div>
+      <p style="text-align:center;font-size:12px;color:var(--muted);margin-top:4px">Pink = the ending that carries the pronoun.</p>
+    </div>
+  </section>
+
+  <!-- 5 OBJECT PRONOUN -->
+  <section class="slide">
+    <div class="panel">
+      <span class="eyebrow" style="color:var(--teal-d);background:var(--teal-l)">Verb + object pronoun</span>
+      <h2 class="title" style="font-size:20px">Replace the object with a pronoun</h2>
+      <p class="lead">An attached pronoun lands on the <b>end of the verb</b>. Tap each card to combine.</p>
+      <div class="grid g3">
+        <div class="icard" onclick="this.classList.toggle('open')"><div class="src">كَتَبَ إِبْرَاهِيمُ رِسَالَةً</div><div class="down">↓</div>
+          <div class="res">كَتَبَهَا إِبْرَاهِيمُ</div><div class="gloss">Ibrahim wrote it</div><div class="tap">tap ▸</div></div>
+        <div class="icard" onclick="this.classList.toggle('open')"><div class="src">كَتَبَتْ مَرْيَمُ رِسَالَةً</div><div class="down">↓</div>
+          <div class="res">كَتَبَتْهَا مَرْيَمُ</div><div class="gloss">Maryam wrote it</div><div class="tap">tap ▸</div></div>
+        <div class="icard" onclick="this.classList.toggle('open')"><div class="src">كَتَبْتُ رِسَالَةً</div><div class="down">↓</div>
+          <div class="res">كَتَبْتُهَا</div><div class="gloss">I wrote it</div><div class="tap">tap ▸</div></div>
+        <div class="icard" onclick="this.classList.toggle('open')"><div class="src">فَتَحَ الوَلَدُ البَابَ</div><div class="down">↓</div>
+          <div class="res">فَتَحَهُ الوَلَدُ</div><div class="gloss">the boy opened it</div><div class="tap">tap ▸</div></div>
+        <div class="icard" onclick="this.classList.toggle('open')"><div class="src">شَرِبْتُ المَاءَ</div><div class="down">↓</div>
+          <div class="res">شَرِبْتُهُ</div><div class="gloss">I drank it</div><div class="tap">tap ▸</div></div>
+        <div class="icard" onclick="this.classList.toggle('open')"><div class="src">سَمِعَ الأَوْلَادُ الصَّوْتَ</div><div class="down">↓</div>
+          <div class="res">سَمِعَهُ الأَوْلَادُ</div><div class="gloss">the boys heard it</div><div class="tap">tap ▸</div></div>
+      </div>
+      <div class="note"><span class="ic">!</span><div>Two endings change when a pronoun attaches: <span class="ar" style="font-size:17px">ـُوا</span> loses its silent alif (<span class="ar" style="font-size:17px">كَتَبُوا → كَتَبُوهَا</span>), and <span class="ar" style="font-size:17px">ـْتُمْ</span> becomes <span class="ar" style="font-size:17px">ـْتُمُو</span> (<span class="ar" style="font-size:17px">كَتَبْتُمُوهَا</span>).</div></div>
+      <div class="qbox"><div class="tag">From the Qur’an</div>
+        <div class="qitem"><div class="line">وَمَا <span class="hl">قَتَلُوهُ</span> وَمَا <span class="hl">صَلَبُوهُ</span></div><small>Sūrah an-Nisā’, 4:157 — “they did not kill him, nor crucify him.” The alif of ـُوا drops before ـهُ.</small></div>
+        <div class="qitem"><div class="line">لَوْلَا إِذْ <span class="hl">سَمِعْتُمُوهُ</span> ظَنَّ الْمُؤْمِنُونَ</div><small>Sūrah an-Nūr, 24:12 — “why, when you heard it, did the believers not think well…” Here ـْتُمْ becomes ـْتُمُو.</small></div>
+        <div class="qitem"><div class="line">وَلَقَدْ <span class="hl">نَصَرَكُمُ</span> اللَّهُ بِبَدْرٍ</div><small>Sūrah Āl ‘Imrān, 3:123 — “Allah had already given you victory at Badr.”</small></div>
+        <div class="qitem"><div class="line"><span class="hl">حَمَلَتْهُ</span> أُمُّهُ كُرْهًا</div><small>Sūrah al-Aḥqāf, 46:15 — “his mother carried him with hardship.”</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 WORD ORDER -->
+  <section class="slide">
+    <div class="panel">
+      <span class="eyebrow" style="color:var(--blue-d);background:var(--blue-l)">In sentences</span>
+      <h2 class="title"><span class="ar">الجُمَل</span>Verb first, or subject first</h2>
+      <p class="lead">With the <b>verb first</b>, it stays singular and only matches gender. With the <b>subject first</b>, the verb matches in gender <i>and</i> number.</p>
+      <div class="subhead">Verb first</div>
+      <div class="exrow"><span class="phrase"><span class="vb">كَتَبَ</span> <span class="sb">إِبْرَاهِيمُ</span> رِسَالَةً</span><span class="gl">Ibrahim wrote a letter</span></div>
+      <div class="exrow"><span class="phrase"><span class="vb">كَتَبَتْ</span> <span class="sb">مَرْيَمُ</span> رِسَالَةً</span><span class="gl">Maryam wrote a letter</span></div>
+      <div class="subhead">Subject first — the verb agrees fully</div>
+      <div class="exrow"><span class="phrase"><span class="sb">إِبْرَاهِيمُ</span> <span class="vb">كَتَبَ</span> رِسَالَةً</span><span class="gl">he — singular</span></div>
+      <div class="exrow"><span class="phrase"><span class="sb">مَرْيَمُ</span> <span class="vb">كَتَبَتْ</span> رِسَالَةً</span><span class="gl">she — singular</span></div>
+      <div class="exrow"><span class="phrase"><span class="sb">إِبْرَاهِيمُ وَإِسْمَاعِيلُ</span> <span class="vb">كَتَبَا</span> الرَّسَائِلَ</span><span class="gl">two men — dual</span></div>
+      <div class="exrow"><span class="phrase"><span class="sb">مَرْيَمُ وَزَيْنَبُ</span> <span class="vb">كَتَبَتَا</span> رَسَائِلَ</span><span class="gl">two women — dual</span></div>
+      <div class="exrow"><span class="phrase"><span class="sb">الأَوْلَادُ</span> <span class="vb">كَتَبُوا</span> رِسَالَةً</span><span class="gl">the boys — plural</span></div>
+      <div class="exrow"><span class="phrase"><span class="sb">النِّسَاءُ</span> <span class="vb">كَتَبْنَ</span> رَسَائِلَ</span><span class="gl">the women — plural</span></div>
+      <div class="subhead">More sound verbs</div>
+      <div class="exrow"><span class="phrase"><span class="sb">الطُّلَّابُ</span> <span class="vb">دَخَلُوا</span> الفَصْلَ</span><span class="gl">The students entered the classroom</span></div>
+      <div class="exrow"><span class="phrase"><span class="sb">البَنَاتُ</span> <span class="vb">ذَهَبْنَ</span> إِلَى المَدْرَسَةِ</span><span class="gl">The girls went to school</span></div>
+      <div class="exrow"><span class="phrase"><span class="sb">الوَلَدَانِ</span> <span class="vb">جَلَسَا</span> فِي المَسْجِدِ</span><span class="gl">The two boys sat in the mosque</span></div>
+      <div class="exrow"><span class="phrase"><span class="vb">فَتَحَتِ</span> <span class="sb">المُعَلِّمَةُ</span> البَابَ</span><span class="gl">The teacher opened the door (verb first, she)</span></div>
+      <div class="legend"><span><i style="background:var(--rose-l);border:1px solid var(--rose)"></i> verb</span><span><i style="background:var(--blue-l);border:1px solid var(--blue)"></i> subject</span></div>
+      <div class="qbox"><div class="tag">From the Qur’an — verb first stays singular</div>
+        <div class="qitem"><div class="line">وَ<span class="hl">دَخَلَ</span> مَعَهُ السِّجْنَ <span class="hl">فَتَيَانِ</span></div><small>Sūrah Yūsuf, 12:36 — “and two young men entered the prison with him.” The verb دَخَلَ stays singular even though the subject فَتَيَانِ is dual.</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 QURAN FORMS -->
+  <section class="slide">
+    <div class="panel">
+      <span class="eyebrow" style="color:var(--green-d);background:var(--green-l)">From the Qur'an</span>
+      <h2 class="title" style="font-size:20px">The endings, person by person</h2>
+      <div class="qbox" style="margin-top:0">
+        <div class="qitem"><div class="line">وَذَا النُّونِ إِذ <span class="hl">ذَّهَبَ</span> مُغَاضِبًا</div><small>he — ـَ · Sūrah al-Anbiyā’, 21:87: “and [remember] Dhun-Nun, when he went off in anger.”</small></div>
+        <div class="qitem"><div class="line">فَلَمَّا <span class="hl">سَمِعَتْ</span> بِمَكْرِهِنَّ أَرْسَلَتْ إِلَيْهِنَّ</div><small>she — ـَتْ · Sūrah Yūsuf, 12:31: “when she heard of their scheming, she sent for them.”</small></div>
+        <div class="qitem"><div class="line">فَلَمَّا <span class="hl">ذَهَبُوا</span> بِهِ وَأَجْمَعُوا أَن يَجْعَلُوهُ فِي غَيَابَتِ الْجُبِّ</div><small>they (m.) — ـُوا · Sūrah Yūsuf, 12:15: “so when they took him away and agreed to put him into the well.”</small></div>
+        <div class="qitem"><div class="line">رَبِّ إِنِّي <span class="hl">ظَلَمْتُ</span> نَفْسِي فَاغْفِرْ لِي</div><small>I — ـْتُ · Sūrah al-Qaṣaṣ, 28:16: “My Lord, I have wronged myself, so forgive me.”</small></div>
+        <div class="qitem"><div class="line">رَبَّنَا مَا <span class="hl">خَلَقْتَ</span> هَٰذَا بَاطِلًا</div><small>you (m. sing.) — ـْتَ · Sūrah Āl ‘Imrān, 3:191: “Our Lord, You did not create this in vain.”</small></div>
+        <div class="qitem"><div class="line">أَ<span class="hl">كَفَرْتُم</span> بَعْدَ إِيمَانِكُمْ</div><small>you (m. pl.) — ـْتُمْ · Sūrah Āl ‘Imrān, 3:106: “Did you disbelieve after your belief?”</small></div>
+        <div class="qitem"><div class="line">إِنَّا <span class="hl">فَتَحْنَا</span> لَكَ فَتْحًا مُّبِينًا</div><small>we — ـْنَا · Sūrah al-Fatḥ, 48:1: “Indeed, We have granted you a clear conquest.”</small></div>
+      </div>
+      <div class="note"><span class="ic">i</span><div>I haven't included verses for the dual, feminine-plural and “you (f.)” forms of sound verbs, since I couldn't confirm clean examples for them.</div></div>
+    </div>
+  </section>
+
+  <!-- 8 RECAP -->
+  <section class="slide">
+    <div class="panel">
+      <span class="eyebrow" style="color:var(--gold);background:#faf3dc">Recap</span>
+      <h2 class="title" style="font-size:20px">Everything in one place</h2>
+      <table class="recap">
+        <tr><td>Stem</td><td>The 3 root letters with their vowels (<span class="w">كَتَب</span>) — never changes for sound verbs.</td></tr>
+        <tr><td>He / she / they</td><td><span class="w">ـَ · ـَا · ـُوا · ـَتْ · ـَتَا · ـْنَ</span></td></tr>
+        <tr><td>You</td><td><span class="w">ـْتَ · ـْتُمَا · ـْتُمْ · ـْتِ · ـْتُمَا · ـْتُنَّ</span></td></tr>
+        <tr><td>I / we</td><td><span class="w">ـْتُ · ـْنَا</span></td></tr>
+        <tr><td>Object pronoun</td><td>Attaches to the verb's end. <span class="w">ـُوا</span> drops its alif; <span class="w">ـْتُمْ</span> becomes <span class="w">ـْتُمُو</span>.</td></tr>
+        <tr><td>Word order</td><td>Verb first → stays singular (gender only). Subject first → full agreement.</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- 9 QUIZ -->
+  <section class="slide">
+    <div class="panel quiz">
+      <span class="eyebrow" style="color:var(--gold);background:#faf3dc">Quick Check</span>
+      <h2 class="title" style="font-size:20px">Pick the right form</h2>
+      <p class="lead">Conjugate the verb for the pronoun shown.</p>
+      <div class="q-count" id="qcount"></div>
+      <div class="q-word ar" id="qword"></div>
+      <div class="q-for" id="qfor"></div>
+      <div class="opts" id="qopts"></div>
+      <div class="fb" id="qfb"></div>
+      <div class="scoreline" id="qscore"></div>
+    </div>
+  </section>
+
+  <!-- 10 ANSWER KEY -->
+  <section class="slide">
+    <div class="panel">
+      <span class="eyebrow" style="color:var(--gold);background:#faf3dc">Reference</span>
+      <h2 class="title" style="font-size:20px">Quiz — questions &amp; answers</h2>
+      <p class="lead">All ten questions, with the correct form and the ending that makes it.</p>
+      <div id="keyList"></div>
+    </div>
+  </section>
+
+  <!-- 11 DONE -->
+  <section class="slide">
+    <div class="panel hero">
+      <div style="font-size:52px">🎉</div>
+      <div class="ar big" style="font-size:36px">أَحْسَنْتَ!</div>
+      <div class="sub">You can conjugate the past tense</div>
+      <p class="lead" style="max-width:600px;margin:0 auto">Keep the stem, swap the ending, and the verb names its own subject —
+        for any sound three-letter verb.</p>
+      <div class="chips" style="margin-top:6px">
+        <span class="mini" style="background:var(--olive-l);color:var(--olive-d)">كَتَبَ</span>
+        <span class="mini" style="background:var(--rose-l);color:var(--rose-d)">كَتَبْتُ</span>
+        <span class="mini" style="background:var(--teal-l);color:var(--teal-d)">كَتَبْتُهَا</span>
+      </div>
+      <div style="margin-top:22px"><button class="btn next" onclick="goTo(0)">↺ Start over</button></div>
+    </div>
+  </section>
+
+  <div class="nav">
+    <button class="btn prev" id="prevBtn" onclick="move(-1)">‹ Back</button>
+    <button class="btn next" id="nextBtn" onclick="move(1)">Next ›</button>
+  </div>
+  <p class="kbd-hint">Tip: use the ← and → arrow keys to move between steps</p>
+</div>
+
+<script>
+  const slides=[...document.querySelectorAll('.slide')];
+  const labels=['Intro','Sound Verbs','Big Idea','Endings','Conjugator','+ Object','Word Order','Qur\u2019an','Recap','Quiz','Answer Key','Done'];
+  let cur=0;
+  const dotWrap=document.getElementById('dots');
+  labels.forEach((l,i)=>{const b=document.createElement('button');b.textContent=l;b.onclick=()=>goTo(i);dotWrap.appendChild(b);});
+  const dots=[...dotWrap.children];
+  function render(){
+    slides.forEach((s,i)=>s.classList.toggle('show',i===cur));
+    dots.forEach((d,i)=>d.classList.toggle('active',i===cur));
+    document.getElementById('bar').style.width=(cur/(slides.length-1)*100)+'%';
+    document.getElementById('prevBtn').disabled=cur===0;
+    document.getElementById('nextBtn').style.visibility = cur===slides.length-1?'hidden':'visible';
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  function move(d){ goTo(Math.min(slides.length-1,Math.max(0,cur+d))); }
+  function goTo(i){ cur=i; render(); }
+  document.addEventListener('keydown',e=>{ if(e.key==='ArrowRight')move(1); if(e.key==='ArrowLeft')move(-1); });
+
+  /* ---------- conjugation engine ---------- */
+  const FATHA='\u064E', KASRA='\u0650', SUKUN='\u0652', DAMMA='\u064F', SHADDA='\u0651', TAT='\u0640';
+  const V=[
+    {r:['ك','ت','ب'], v:FATHA, en:'he wrote'},
+    {r:['ذ','ه','ب'], v:FATHA, en:'he went'},
+    {r:['ج','ل','س'], v:FATHA, en:'he sat'},
+    {r:['د','خ','ل'], v:FATHA, en:'he entered'},
+    {r:['خ','ر','ج'], v:FATHA, en:'he went out'},
+    {r:['ف','ت','ح'], v:FATHA, en:'he opened'},
+    {r:['ن','ص','ر'], v:FATHA, en:'he helped'},
+    {r:['ح','م','ل'], v:FATHA, en:'he carried'},
+    {r:['س','م','ع'], v:KASRA, en:'he heard'},
+    {r:['ش','ر','ب'], v:KASRA, en:'he drank'},
+    {r:['ف','ه','م'], v:KASRA, en:'he understood'},
+    {r:['ع','ل','م'], v:KASRA, en:'he knew'},
+  ];
+  // ending that follows the 3rd root letter
+  const T={
+    huwa:FATHA, huma_m:FATHA+'ا', hum:DAMMA+'وا', hiya:FATHA+'تْ', huma_f:FATHA+'تَا', hunna:SUKUN+'نَ',
+    anta:SUKUN+'تَ', antuma_m:SUKUN+'تُمَا', antum:SUKUN+'تُمْ', anti:SUKUN+'تِ', antuma_f:SUKUN+'تُمَا', antunna:SUKUN+'تُنَّ',
+    ana:SUKUN+'تُ', nahnu:SUKUN+'نَا'
+  };
+  const P={
+    huwa:['هُوَ','he'], huma_m:['هُمَا','they two (m.)'], hum:['هُمْ','they (m.)'],
+    hiya:['هِيَ','she'], huma_f:['هُمَا','they two (f.)'], hunna:['هُنَّ','they (f.)'],
+    anta:['أَنْتَ','you (m.)'], antuma_m:['أَنْتُمَا','you two (m.)'], antum:['أَنْتُمْ','you (m. pl.)'],
+    anti:['أَنْتِ','you (f.)'], antuma_f:['أَنْتُمَا','you two (f.)'], antunna:['أَنْتُنَّ','you (f. pl.)'],
+    ana:['أَنَا','I'], nahnu:['نَحْنُ','we']
+  };
+  function stemOf(v){ return v.r[0]+FATHA+v.r[1]+v.v+v.r[2]; }
+  function baseOf(v){ return stemOf(v)+FATHA; }
+  function form(v,k){ return stemOf(v)+T[k]; }
+
+  // rows: label, css class, [sing, dual, plural]
+  const ROWS=[
+    ['I / we','أنا · نحن','r1',['ana',null,'nahnu']],
+    ['You (m.)','أنتَ','rm',['anta','antuma_m','antum']],
+    ['You (f.)','أنتِ','rf',['anti','antuma_f','antunna']],
+    ['He / they','هو','rm',['huwa','huma_m','hum']],
+    ['She / they','هي','rf',['hiya','huma_f','hunna']],
+  ];
+  function tableHTML(verb, mode){
+    let h='<table class="ctab"><thead><tr><th></th><th>Singular</th><th>Dual</th><th>Plural</th></tr></thead><tbody>';
+    ROWS.forEach(r=>{
+      h+=`<tr class="${r[2]}"><td><div class="rl">${r[0]}<small class="ar">${r[1]}</small></div></td>`;
+      r[3].forEach(k=>{
+        if(!k){ h+='<td class="dash">—</td>'; return; }
+        if(mode==='ending'){
+          h+=`<td><div class="endonly">${TAT}${T[k]}</div><div class="pn">${P[k][0]}</div></td>`;
+        } else {
+          h+=`<td><div class="cw">${stemOf(verb)}<span class="tail">${T[k]}</span></div><div class="pn">${P[k][0]}</div></td>`;
+        }
+      });
+      h+='</tr>';
+    });
+    return h+'</tbody></table>';
+  }
+  document.getElementById('endTable').innerHTML=tableHTML(null,'ending');
+
+  // conjugator
+  let curV=0;
+  const chipWrap=document.getElementById('vchips');
+  V.forEach((v,i)=>{
+    const b=document.createElement('button'); b.className='vchip';
+    b.innerHTML=`<span class="w ar">${baseOf(v)}</span><small>${v.en}</small>`;
+    b.onclick=()=>{curV=i; drawConj();};
+    chipWrap.appendChild(b);
+  });
+  function drawConj(){
+    const v=V[curV];
+    [...chipWrap.children].forEach((c,i)=>c.classList.toggle('active',i===curV));
+    document.getElementById('curW').textContent=baseOf(v);
+    document.getElementById('curM').textContent=v.en+(v.v===KASRA?'  ·  pattern فَعِلَ':'  ·  pattern فَعَلَ');
+    document.getElementById('conjTable').innerHTML=tableHTML(v,'word');
+  }
+  drawConj();
+
+  /* ---------- quiz (answers generated by the same engine) ---------- */
+  const QS=[
+    {v:1,k:'hum'},{v:5,k:'nahnu'},{v:2,k:'hiya'},{v:9,k:'anti'},{v:3,k:'antuma_m'},
+    {v:8,k:'hunna'},{v:6,k:'ana'},{v:4,k:'huma_f'},{v:10,k:'antunna'},{v:0,k:'huma_m'}
+  ];
+  const ALLK=Object.keys(T);
+  let qi=0, qs=0;
+  function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+  function prettyEnd(k){ return TAT+T[k]; }
+  function loadQ(){
+    const q=QS[qi], v=V[q.v];
+    const ans=form(v,q.k);
+    document.getElementById('qword').textContent=baseOf(v);
+    document.getElementById('qfor').innerHTML=`${v.en} → conjugate for <b>${P[q.k][1]}</b> <span class="ar" style="font-size:18px">(${P[q.k][0]})</span>`;
+    document.getElementById('qcount').textContent=`Question ${qi+1} of ${QS.length}`;
+    const seen=new Set([ans]); const dis=[];
+    shuffle(ALLK).forEach(k=>{ const w=form(v,k); if(!seen.has(w) && dis.length<3){ seen.add(w); dis.push(w);} });
+    const opts=shuffle([ans,...dis]);
+    const wrap=document.getElementById('qopts'); wrap.innerHTML='';
+    opts.forEach(o=>{
+      const b=document.createElement('button'); b.className='opt'; b.textContent=o;
+      b.onclick=()=>answer(b,o,ans,q); wrap.appendChild(b);
+    });
+    document.getElementById('qfb').className='fb';
+  }
+  function answer(btn,choice,ans,q){
+    [...document.querySelectorAll('#qopts .opt')].forEach(o=>{ o.disabled=true; if(o.textContent===ans)o.classList.add('correct'); });
+    const why=`The ending <span class="ar" style="font-size:18px">${prettyEnd(q.k)}</span> means “${P[q.k][1]}”.`;
+    const fb=document.getElementById('qfb');
+    if(choice===ans){qs++; fb.className='fb ok show'; fb.innerHTML='✅ Correct! '+why;}
+    else{btn.classList.add('wrong'); fb.className='fb no show'; fb.innerHTML='Not quite. '+why;}
+    qi++;
+    if(qi<QS.length){ setTimeout(loadQ,1700); }
+    else{ setTimeout(()=>{document.getElementById('qscore').textContent=`Score: ${qs} / ${QS.length}`;},1400); }
+  }
+  function buildKey(){
+    const wrap=document.getElementById('keyList');
+    QS.forEach((q,i)=>{
+      const v=V[q.v];
+      const row=document.createElement('div'); row.className='keyrow';
+      row.innerHTML=`<div class="qn">${i+1}</div><div class="body">
+        <span class="phrase ar">${baseOf(v)}</span> <span style="color:var(--muted)">→ ${P[q.k][1]}</span>
+        <span class="verdict">${form(v,q.k)}</span>
+        <div class="why">Ending <span class="ar" style="font-size:16px">${prettyEnd(q.k)}</span> (${P[q.k][0]}) — “${v.en.replace('he ','')}” for ${P[q.k][1]}.</div></div>`;
+      wrap.appendChild(row);
+    });
+  }
+  loadQ(); buildKey(); render();
+</script>
+</body>
+</html>
